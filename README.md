@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 Baklol - Modern AI Chatbot
 
-## Getting Started
+A production-ready, responsive AI chatbot built with **Next.js 15**, **Tailwind CSS**, and **Google Gemini API**. It features a "Gemini-style" UI with smooth animations, markdown support, and syntax highlighting for code.
 
-First, run the development server:
+![Baklol Preview](/preview.png)
 
+## ✨ Features
+
+- **🧠 AI Intelligence:** Powered by Google's **Gemini 1.5 Flash** model for fast, accurate responses.
+- **⚡ Real-time Chat:** Instant interaction with a clean, centered interface.
+- **🎨 Modern UI/UX:**
+  - Fully responsive design (Mobile & Desktop).
+  - **Dark/Light Mode** support with persistent theme switching.
+  - Smooth animations using **Framer Motion**.
+- **📝 Rich Text Support:**
+  - Renders **Markdown** (Headings, Lists, Bold/Italic).
+  - **Syntax Highlighting** for code blocks (React, Python, etc.).
+- **🛠 Developer Experience:** Built with TypeScript and the Next.js App Router.
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **AI Model:** [Google Gemini API](https://ai.google.dev/)
+- **Markdown:** `react-markdown`, `react-syntax-highlighter`
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally.
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone [https://github.com/your-username/baklol.git](https://github.com/your-username/baklol.git)
+cd baklol
