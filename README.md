@@ -2,7 +2,7 @@
 
 A production-ready, responsive AI chatbot built with **Next.js 15**, **Tailwind CSS**, and **Google Gemini API**. It features a "Gemini-style" UI with smooth animations, markdown support, and syntax highlighting for code.
 
-![Baklol Preview](/preview.png)
+![Baklol Preview](public/preview.png)
 
 ## ✨ Features
 
