@@ -1,65 +1,166 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { ChatMessage } from "@/components/ui/chat-message";
+import { ChatInput } from "@/components/ui/chat-input";
+import { Sparkles, Terminal, Moon, Sun, Trash2 } from "lucide-react";
+import { useTheme } from "next-themes";
+import { motion, AnimatePresence } from "framer-motion";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
 
 export default function Home() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { theme, setTheme } = useTheme();
+
+  const suggestions = [
+    { icon: <Terminal size={18} />, text: "Write a React component" },
+    { icon: <Sparkles size={18} />, text: "Explain Quantum Physics" },
+    { icon: <Terminal size={18} />, text: "Debug this Python script" },
+  ];
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSend = async (content: string) => {
+    const newMessages: Message[] = [...messages, { role: "user", content }];
+    setMessages(newMessages);
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages }),
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch");
+
+      const data = await response.json();
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: data.content },
+      ]);
+    } catch (error) {
+      console.error(error);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Sorry, I encountered an error connecting to the server.",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const clearChat = () => setMessages([]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col h-screen bg-white dark:bg-zinc-950 transition-colors duration-300">
+      {/* Header */}
+      <header className="flex items-center justify-between p-4 border-b border-zinc-100 dark:border-zinc-800/50 z-10">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-purple-500 flex items-center justify-center">
+            <span className="text-white font-bold text-lg">B</span>
+          </div>
+          <h1 className="font-semibold text-lg tracking-tight">Baklol</h1>
+          <span className="text-xs px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 rounded-full text-zinc-500">
+            Beta
+          </span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="flex items-center gap-2">
+          {messages.length > 0 && (
+            <button
+              onClick={clearChat}
+              className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full text-zinc-500 transition-colors"
+              title="Clear history"
+            >
+              <Trash2 className="w-5 h-5" />
+            </button>
+          )}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full text-zinc-500 transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+        </div>
+      </header>
+
+      {/* Main Chat Area */}
+      <main className="flex-1 overflow-y-auto custom-scrollbar relative">
+        <div className="max-w-3xl mx-auto w-full pb-32 pt-6">
+          <AnimatePresence mode="wait">
+            {messages.length === 0 ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center space-y-8"
+              >
+                <div className="space-y-2">
+                  <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    Hello, Human.
+                  </h2>
+                  <p className="text-zinc-500 dark:text-zinc-400 text-lg">
+                    I'm Baklol. How can I help you today?
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full max-w-2xl">
+                  {suggestions.map((s, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handleSend(s.text)}
+                      className="flex flex-col items-start p-4 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all text-left group"
+                    >
+                      <span className="p-2 bg-white dark:bg-zinc-800 rounded-lg mb-3 shadow-sm group-hover:scale-110 transition-transform">
+                        {s.icon}
+                      </span>
+                      <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                        {s.text}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            ) : (
+              <div className="space-y-6">
+                {messages.map((msg, idx) => (
+                  <ChatMessage key={idx} role={msg.role} content={msg.content} />
+                ))}
+                {isLoading && (
+                  <div className="flex items-center justify-center p-4">
+                    <div className="flex space-x-2">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                      <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce"></div>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+            )}
+          </AnimatePresence>
         </div>
       </main>
+
+      {/* Input Footer */}
+      <footer className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white to-transparent dark:from-zinc-950 dark:via-zinc-950 pb-6 z-20">
+        <ChatInput onSend={handleSend} isLoading={isLoading} />
+      </footer>
     </div>
   );
 }
