@@ -112,7 +112,7 @@ export default function Home() {
               >
                 <div className="space-y-2">
                   <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    Hello, Human.
+                    Hello, Overlord 💀
                   </h2>
                   <p className="text-zinc-500 dark:text-zinc-400 text-lg">
                     I'm Baklol. How can I help you today?
