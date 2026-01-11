@@ -14,8 +14,9 @@ interface Message {
   content: string;
 }
 
-export default function ChatInterface({ user }: { user: any }) {
-  const [messages, setMessages] = useState<Message[]>([]);
+// Updated to accept initialMessages (History from MongoDB)
+export default function ChatInterface({ user, initialMessages = [] }: { user: any, initialMessages?: Message[] }) {
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
