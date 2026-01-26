@@ -34,9 +34,9 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
         isAI ? "bg-transparent" : "bg-transparent"
       )}
     >
-      <div className="flex-shrink-0 mt-1">
+      <div className="shrink-0 mt-1">
         {isAI ? (
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+          <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
             <Bot className="w-5 h-5 text-white" />
           </div>
         ) : (
@@ -78,7 +78,7 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
                     style={vscDarkPlus}
                     language={match[1]}
                     PreTag="div"
-                    className="rounded-lg !mt-2 !mb-2 shadow-sm"
+                    className="rounded-lg mt-2! mb-2! shadow-sm"
                   >
                     {String(children).replace(/\n$/, "")}
                   </SyntaxHighlighter>

@@ -92,7 +92,7 @@ export default function ChatInterface({
       {/* Header */}
       <header className="flex items-center justify-between p-4 border-b border-zinc-100 dark:border-zinc-800/50 z-10">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-purple-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-linear-to-tr from-blue-600 to-purple-500 flex items-center justify-center">
             <span className="text-white font-bold text-lg">B</span>
           </div>
           <h1 className="font-semibold text-lg tracking-tight">Baklol</h1>
@@ -156,7 +156,7 @@ export default function ChatInterface({
                 className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center space-y-8"
               >
                 <div className="space-y-2">
-                  <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  <h2 className="text-4xl font-bold bg-linear-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                     {user ? `Hello, ${user.name?.split(" ")[0]}.` : "Hello, Human."}
                   </h2>
                   <p className="text-zinc-500 dark:text-zinc-400 text-lg">
@@ -203,7 +203,7 @@ export default function ChatInterface({
       </main>
 
       {/* Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white to-transparent dark:from-zinc-950 dark:via-zinc-950 pb-6 z-20">
+      <footer className="fixed bottom-0 left-0 right-0 p-4 bg-linear-to-t from-white via-white to-transparent dark:from-zinc-950 dark:via-zinc-950 pb-6 z-20">
         {/* Pass the disabled prop here */}
         <ChatInput 
           onSend={handleSend} 
