@@ -95,7 +95,7 @@ export default function ChatInterface({
           <div className="w-8 h-8 rounded-lg bg-linear-to-tr from-blue-600 to-purple-500 flex items-center justify-center">
             <span className="text-white font-bold text-lg">B</span>
           </div>
-          <h1 className="font-semibold text-lg tracking-tight">Baklol</h1>
+          <h1 className="font-semibold text-lg tracking-tight">Kurmi</h1>
         </div>
 
         <div className="flex items-center gap-4">
@@ -160,7 +160,7 @@ export default function ChatInterface({
                     {user ? `Hello, ${user.name?.split(" ")[0]}.` : "Hello, Human."}
                   </h2>
                   <p className="text-zinc-500 dark:text-zinc-400 text-lg">
-                    I'm Baklol. How can I help you today?
+                    I'm Kurmi. How can I help you today?
                   </p>
                 </div>
 
