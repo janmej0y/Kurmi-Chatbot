@@ -1,4 +1,4 @@
-# 🤖 Baklol - Full Stack AI Chatbot
+# 🤖 Kurmi - Full Stack AI Chatbot
 
 A production-ready, full-stack AI chatbot built with **Next.js 15**, **MongoDB**, and **Google Gemini API**. It features a secure authentication system, persistent chat history, and a smart rate-limiting engine.
 
